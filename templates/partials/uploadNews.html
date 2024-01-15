@@ -1,0 +1,47 @@
+{% extends "base/index.html" %}
+
+{% block content %}
+<div class="form-container">
+    <form method="post" action="" class="your-form-class">
+        {% csrf_token %}
+        <div class="form-field">
+            <label for="{{ form.author.id_for_label }}" class="form-label">Author:</label>
+            {{ form.author }}
+        </div>
+        <div class="form-field">
+            <label for="{{ form.title.id_for_label }}" class="form-label">Title:</label>
+            {{ form.title }}
+        </div>
+        <div class="form-field">
+            <label for="{{ form.description.id_for_label }}" class="form-label">Description:</label>
+            {{ form.description }}
+        </div>
+        <div class="form-field">
+            <label for="{{ form.video.id_for_label }}" class="form-label">Video:</label>
+            {{ form.video }}
+        </div>
+        <div class="form-field">
+            <label for="{{ form.image.id_for_label }}" class="form-label">Image:</label>
+            {{ form.image }}
+        </div>
+        <div class="form-field">
+            <label for="{{ form.source.id_for_label }}" class="form-label">Source:</label>
+            {{ form.source }}
+        </div>
+        <div class="form-field">
+            <label for="{{ form.category.id_for_label }}" class="form-label">Category:</label>
+            {{ form.category }}
+        </div>
+        <div class="form-field">
+            <label for="{{ form.promotion.id_for_label }}" class="form-label">Promotion:</label>
+            {{ form.promotion }}
+        </div>
+        <button type="submit" class="form-submit">Submit</button>
+    </form>
+</div>
+
+
+{% endblock content %}
+    
+    
+    
