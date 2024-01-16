@@ -316,6 +316,65 @@ a {
 }
 
 
+/* Publish News form */
+
+/* Add these styles to your existing CSS file or create a new one */
+
+.form-container {
+    max-width: 700px;
+    margin: auto;
+    margin: 100px 300px;
+}
+
+.publish-form-class {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-field {
+    margin-bottom: 15px;
+}
+
+.form-label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* You can add more specific styles for form input fields, such as text, textarea, etc. */
+.publish-form-class input,
+.publish-form-class select {
+    width: 100%;
+    border: none;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-top: 5px;
+    border-bottom: 1px solid #ccc;
+}
+.publish-form-class textarea{ 
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+
+.form-submit {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 200px;
+    box-shadow: 5px 5px 10px #55c57a;
+}
+
+.form-submit:hover {
+    background-color: #45a049;
+}
+
+
+/* Endo of Publish News Form */
 /* Style the tab */
 
 div.tab {

@@ -7,8 +7,15 @@ class Author(models.Model):
     name = models.CharField(max_length=55)
     bio = models.TextField()
 
+    def __str__(self) -> str:
+        return self.name
+
 class NewsCategory(models.Model):
     category_name = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.category_name
+    
 
 class Promotion(models.Model):
     title = models.CharField(max_length=100, null=True, blank=True)
@@ -24,9 +31,14 @@ class News(models.Model):
     video = models.FileField(upload_to="videos/", null=True, blank=True)
     image = models.ImageField(upload_to="pictures/", null=True, blank=True)
     source = models.CharField(max_length=200, null=True, blank=True)
-    category = models.ForeignKey(NewsCategory, on_delete=models.CASCADE)
+    category = models.ForeignKey(NewsCategory, on_delete=models.CASCADE, related_name="news")
     promotion = models.ManyToManyField(Promotion)
 
+    def __str__(self) -> str:
+        return f"\"{self.title}\" from the \"{self.category}\" category"
+
+    class Meta:
+        ordering =["-date_created"]
 
 class Tags(models.Model):
     news = models.ManyToManyField(News)

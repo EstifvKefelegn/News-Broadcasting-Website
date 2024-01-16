@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'Base.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'MesobNews',
+        'NAME': 'MesobNews2',
         'HOST':'localhost',
         'USER':'root',
         'PASSWORD': 'birth19911215'

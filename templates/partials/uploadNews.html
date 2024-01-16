@@ -1,8 +1,9 @@
 {% extends "base/index.html" %}
-
+{% load static %}
 {% block content %}
 <div class="form-container">
-    <form method="post" action="" class="your-form-class">
+   <h2>Publish Your News</h2>
+    <form method="post" action="" class="publish-form-class">
         {% csrf_token %}
         <div class="form-field">
             <label for="{{ form.author.id_for_label }}" class="form-label">Author:</label>
@@ -36,8 +37,9 @@
             <label for="{{ form.promotion.id_for_label }}" class="form-label">Promotion:</label>
             {{ form.promotion }}
         </div>
-        <button type="submit" class="form-submit">Submit</button>
+        <button type="submit" class="form-submit">Publish your news</button>
     </form>
+    </div>
 </div>
 
 
