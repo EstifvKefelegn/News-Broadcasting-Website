@@ -3,7 +3,7 @@
 {% block content %}
 <div class="form-container">
    <h2>Publish Your News</h2>
-    <form method="post" action="" class="publish-form-class">
+    <form method="POST" action="" class="publish-form-class" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-field">
             <label for="{{ form.author.id_for_label }}" class="form-label">Author:</label>
