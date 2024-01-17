@@ -138,6 +138,23 @@ a {
     position: relative;
     background-color: #ffffff;
 }
+.publish-button {
+    border: none;
+    display: inline-block;
+    padding: 10px 40px;
+    margin-left: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    background-color: #3197d6;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    outline: none;
+    box-shadow: 2px 2px 15px #007bff;
+}
+
 
 .navbar-inverse .navbar-nav .nav-link,
 .navbar-nav .nav-link {
@@ -315,6 +332,13 @@ a {
     width: 100%;
 }
 
+.container{
+    width: 100%;
+    /* display: flex; */
+}
+
+
+
 
 /* Publish News form */
 
@@ -323,7 +347,7 @@ a {
 .form-container {
     max-width: 700px;
     margin: auto;
-    margin: 100px 300px;
+    /* margin: 100px 300px; */
 }
 
 .publish-form-class {

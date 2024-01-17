@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #Custom Apps
-    'News'
+    'News',
+    'userauth'
+
 ]
 
 MIDDLEWARE = [

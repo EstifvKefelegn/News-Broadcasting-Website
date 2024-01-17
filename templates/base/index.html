@@ -193,6 +193,12 @@
                             <li class="nav-item">
                                 <a class="nav-link color-grey-hover" href="blog-category-06.html">Health</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link color-pink-hover" href="{% url "user:signout" %}">Logout</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{% url "news:publishnews" %}"><button class="publish-button">Publish News</button></a>
+                            </li>
                         </ul>
                     </div>
                 </nav>
@@ -230,6 +236,7 @@
                         </div><!-- end page-wrapper -->
                     </div><!-- end col -->
 
+                    {% block sidebarcontent %}
                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                         <div class="sidebar">
                             <div class="widget">
@@ -314,6 +321,9 @@
 
                         </div><!-- end sidebar -->
                     </div><!-- end col -->
+
+                    {% endblock sidebarcontent %}
+                
                 </div><!-- end row -->
             </div><!-- end container -->
         </section>
