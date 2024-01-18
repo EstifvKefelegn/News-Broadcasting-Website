@@ -1,0 +1,13 @@
+{% extends "base/index.html" %}
+
+{% block publish %}
+
+{% if profile and user.is_authenticated%}
+    
+        <a href="#"><button class="publish-button">Publish News</button></a>
+{% endif %}
+
+{% endblock publish %}
+
+
+

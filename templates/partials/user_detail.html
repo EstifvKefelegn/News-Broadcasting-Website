@@ -1,0 +1,32 @@
+{% extends "base/index.html" %}
+{% load static %}
+
+{% block content %}
+
+<style>
+.user_list_profile {
+    height: 100px;
+    width: 300px;
+}
+</style>
+
+<div>{{detail.user}}</div><br>
+<div><img class="user_list_profile" src="{{ detail.profile_image.url }}" alt=""></div>
+<br>
+<div>{{detail.short_intro}}</div>
+<br>
+{% comment %} <li>{{detail.upload_cv.url}}</li> {% endcomment %}
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+
+
+
+
+
+{% endblock content %}
+
+
+

@@ -1,0 +1,59 @@
+# Instruction 1: Everything is case sensitive
+# Instruction 2: After creating the object (e.g., Q1), DO NOT PRINT!
+# Instruction 3: Be sure to define functions in reference to previously created strings/lists
+
+# Step 1: Create a string called Q1 with the characters "Data Science for all!"
+Q1 = "Data Science for all!"
+
+# Step 2: Create a function called Q2 that loops through and prints each character in Q1.
+def Q2():
+    for char in Q1:
+        print(char)
+
+# Step 3: Create a function called Q3 that loops through each character in Q1 and prints "A" for each character.
+def Q3():
+    for _ in Q1:
+        print("A")
+
+# Step 4: Create a list called Q4 with the following five items.
+Q4 = ["DTSC 520", "DTSC 550", "DTSC 575", "DTSC 600", "DTSC 650"]
+
+# Step 5: Create a function called Q5 that loops through and prints each item in Q4.
+def Q5():
+    for item in Q4:
+        print(item)
+
+# Step 6: Create a function called Q6 that prints all values less than 50, starting with 2, doubled each iteration.
+def Q6():
+    value = 2
+    while value < 50:
+        print(value)
+        value *= 2
+
+# Step 7: Create a list containing the specified numbers and assign it to Q7.
+Q7 = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
+
+# Step 8: Create a function called Q8 that adds all the numbers in Q7 and returns the sum.
+def Q8():
+    return sum(Q7)
+
+# Step 9: Create a function called Q9 that determines how many times a number can be squared until reaching a twenty digit number.
+def Q9():
+    number = 3
+    count = 0
+    while True:
+        squared = number * number
+        if len(str(squared)) >= 20:
+            return count
+        else:
+            number = squared
+            count += 1
+
+# Following the instructions not to print after creating the objects/functions
+Q2_result = Q2  # Assigning the function Q2 to a variable without executing it
+Q3_result = Q3  # Assigning the function Q3 to a variable without executing it
+Q5_result = Q5  # Assigning the function Q5 to a variable without executing it
+Q6_result = Q6  # Assigning the function Q6 to a variable without executing it
+Q8_result = Q8  # Assigning the function Q8 to a variable without executing it
+Q9_result = Q9  # Assigning the function Q9 to a variable without executing it
+

@@ -1,0 +1,19 @@
+{% extends "base/index.html" %}
+{% comment %} {% load static %} {% endcomment %}
+
+{% block content %}
+
+{% for user in users_list %}
+<ul>
+<li><a href="{% url "user:userdetail" user.id %}">{{user}}</a></li>
+</ul>
+{% endfor %}
+
+{% endblock content %}
+
+
+
+
+
+
+

@@ -340,7 +340,56 @@ a {
 
 
 
-/* Publish News form */
+/* Journalist Profile form */
+.full-container {
+    width: 900px;
+    height: 700px;
+    background-position: center;
+    background-size: cover;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-left:20%;
+
+}
+.cont {
+    max-width: 500px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-form {
+    display: grid;
+    gap: 15px;
+}
+
+.profile-label {
+    font-weight: bold;
+}
+
+.profile-input, .profile-area {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.profile-submit-btn {
+    background-color: #3197d6;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.profile_category{
+    display: flex;
+}
+
+
 
 /* Add these styles to your existing CSS file or create a new one */
 
@@ -1035,7 +1084,9 @@ div.tab button:hover {
 }
 
 .single-post-media img {
-    width: 100%;
+    width: 95%;
+    height: 500px;
+    object-fit: cover;
 }
 
 .blog-title-area {

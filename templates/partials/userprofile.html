@@ -1,0 +1,25 @@
+{% extends "base/index.html" %}
+{% load static %}
+
+{% block content %}
+<div class="full-container">
+<div class="cont">
+    <h2>User Profile</h2>
+    <form action="#" class="profile-form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="profile_image" class="profile-label">Profile Image:</label>
+        <input type="file" name="profile_image" class="profile-input" id="profile_image" required>
+
+        
+        <label for="short_intro">Short Intro:</label>
+        <textarea name="short_intro" id="short_intro" rows="4" required></textarea>
+
+        <label for="upload_cv">Upload CV:</label>
+        <input type="file" name="upload_cv" id="upload_cv" required>
+
+        
+        <button type="submit" class="profile-submit-btn">Save Profile</button>
+    </form>
+</div>
+</div>
+{% endblock content %}

@@ -1,14 +1,16 @@
 from django.db import models
-# from django.contrib.auth.models import User
+from django.contrib.auth.models import User
+from userauth.models import JournalistProfile
+
 # Create your models here.
 
-class Author(models.Model):
-    # user = models.OneToOneField(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=55)
-    bio = models.TextField()
+# class Author(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     name = models.CharField(max_length=55)
+#     bio = models.TextField()
 
-    def __str__(self) -> str:
-        return self.name
+#     def __str__(self) -> str:
+#         return self.name
 
 class NewsCategory(models.Model):
     category_name = models.CharField(max_length=100)
@@ -24,7 +26,8 @@ class Promotion(models.Model):
     promo_videos = models.FileField(upload_to='videos/', null=True, blank=True)
 
 class News(models.Model):
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    author = models.ForeignKey(JournalistProfile, on_delete=models.CASCADE, related_name="journalist")
+    # journalist = models.ForeignKey
     title = models.CharField(max_length=100)
     description = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
@@ -46,7 +49,7 @@ class Tags(models.Model):
     
 
 class Review(models.Model):
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     news = models.ForeignKey(News, on_delete=models.CASCADE)
     review_text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -60,3 +63,6 @@ class ViewCount(models.Model):
     count = models.PositiveIntegerField(default=True)
 
     
+class Likes(models.Model):
+    news = models.ForeignKey(News, on_delete=models.CASCADE)
+    number_of_likes = models.IntegerField()
