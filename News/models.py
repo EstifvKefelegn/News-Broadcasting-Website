@@ -24,6 +24,9 @@ class Promotion(models.Model):
     description = models.TextField()
     promo_picture = models.ImageField(upload_to="pictures/", null=True, blank=True)
     promo_videos = models.FileField(upload_to='videos/', null=True, blank=True)
+    
+    def __str__(self) -> str:
+        return self.title
 
 class News(models.Model):
     author = models.ForeignKey(JournalistProfile, on_delete=models.CASCADE, related_name="journalist")
@@ -66,3 +69,4 @@ class ViewCount(models.Model):
 class Likes(models.Model):
     news = models.ForeignKey(News, on_delete=models.CASCADE)
     number_of_likes = models.IntegerField()
+

@@ -9,22 +9,20 @@ from userauth.models import JournalistProfile
 
 # Create your views here.
 def main(request):
-    catgeory = NewsCategory.objects.all()
-    user_id = request.user.id
-    current_user = JournalistProfile.objects.filter(user_id=user_id).first()
-    has_journalist_profile = current_user is not None
-    
-    print(has_journalist_profile)
-    
-    # videos = category_detail.news.filter(image__isnull = False).order_by('-date_created')[:4]
+    category = NewsCategory.objects.all()
+    user = request.user
+  
 
     context = {
-        'category':catgeory,
+        'category':category,
+        # 'profile': current_user if has_journalist_profile else None,
+        'user': user
     }
-    if has_journalist_profile:
-        context['profile'] = current_user
-        print(current_user.can_publish)
-    
+
+    # if has_journalist_profile:
+    #     context['profile'] = current_user
+    #     print(current_user.can_publish)
+    # print(context['profile'].can_publish)     
     
     return render(request, 'base/index.html', context)
     
@@ -45,6 +43,7 @@ def category_detail(request, pk):
 def publish_news(request):
     if request.method == "POST":
         form = NewsUploadForm(request.POST, request.FILES)
+        
         if form.is_valid():
             form.save()
             return redirect("news:newslist")
@@ -54,12 +53,11 @@ def publish_news(request):
         "form":form
     }
     
-    
-
     return render(request, 'partials/uploadNews.html', context)            
 
 
 def news_list(request):
+    category = NewsCategory.objects.all() 
     news = News.objects.all()
     list_of_news =[] 
 
@@ -84,12 +82,15 @@ def news_list(request):
         return render(request, 'partials/404Error.html')
 
     context = {
+        'category':category,
         "news":news,
         "left_main_news":left_main_news,
         "top_main_news":top_main_news,
         "bottom_main_news1":bottom_main_news1,
         "bottom_main_news2":bottom_main_news2,
         "right_main_news":right_main_news,
+        
+
         # "profile": current_user 
     }
     
@@ -109,5 +110,52 @@ def news_detail(request, pk):
 
     return render(request, "partials/newsdetail.html", context)
 
+def edit_news(request, pk):
+   
+    book_detail = News.objects.get(id=pk)
+    if request.method == "POST":
+        edit_news = NewsUploadForm(request.POST, request.FILES,instance=book_detail)
+        if edit_news.is_valid():
+            edit_news.save()
+            return redirect("user:profile")
+        else:
+            print(edit_news.errors)
+    context = {
+        
+        "detail": book_detail,
+        "form":NewsUploadForm(instance=book_detail)
+    }    
+    
+    return render(request, 'partials/editnews.html', context)
+
+def deletenews_confirmation(request, pk):
+    news_instance = News.objects.get(id=pk)
+
+    context = {
+        "news":news_instance
+    } 
+    return render(request, 'partials/delete_confirmation.html', context)
+
+def deletenews(request, pk):
+    news = News.objects.get(id=pk)
+    # if request.method == "POST":
+    news.delete()
+    return redirect("user:profile")
+    # return redirect("user:profile")
+
+# def deletenews(request, pk):
+#     news = News.objects.get(id=pk)
+#     news.delete()
+    
+#     context = {
+#         "news":news
+#     }
+
+#     return render(request, "partials/delete.html", context)
 
 
+# def can_publish_news(request):
+
+#         return render(request, "/check_user.html", context)
+    
+#     return render(request, "partials/404Error.html")

@@ -1,5 +1,10 @@
-{% extends "./index.html" %}
+{% extends "base/index.html" %}
 {% load static %}
+
+
+
+{% include "partials/header.html" %}
+
 
 {% block content %}
 <section class="section first-section">
@@ -83,6 +88,7 @@
 </div>
 </div>
 </section>
+{% endblock content %}
 
 
 
@@ -506,4 +512,3 @@
 
 
 
-{% endblock content %}

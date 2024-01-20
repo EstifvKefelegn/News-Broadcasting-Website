@@ -1,0 +1,10 @@
+{% if user.is_authenticated and profile.can_publish %}
+                            <li class="nav-item">
+                                <a href="{% url "news:publishnews" %}"><button class="publish-button">Publish News</button></a>
+                            </li>
+                            {% else %}
+                            <li class="nav-item">
+                                <a href="{% url "user:profile" %}"><button class="publish-button">Applie to be publisher</button></a>
+                            </li>
+                            
+                            {% endif %}

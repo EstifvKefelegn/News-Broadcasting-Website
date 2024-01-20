@@ -1,0 +1,22 @@
+{% extends "base/index.html" %}
+{% load static %}
+{% block content %}
+<div><a href="{% url "user:profile" %}">Back</a>    
+</div>
+
+    
+<form action="#" method="POST">
+    {% csrf_token %}
+    <strong><p>Are you sure you want to delete this news</p></strong>
+    <input type="submit" value="Delete">
+    </form>
+
+    
+
+{% endblock content %}
+
+
+
+
+
+

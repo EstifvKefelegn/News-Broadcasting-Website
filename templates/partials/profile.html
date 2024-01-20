@@ -1,13 +1,67 @@
 {% extends "base/index.html" %}
+{% load static %}
+{% block content %}
+<h3 class="profilehead">User Profile</h3>
+<div class="card">
+        <div class="card-header">
+          <img src="{{ profile.profile_image.url }}" alt="User Image">
+          <div class="bio"><strong>Bio: </strong>{{profile.bio}}</div>
+        </div>
+        <div class="card-body">
+          <div class="user-name">{{profile.user.username}}</div>
+          <div class="user-description">{{profile.short_intro}}</div>
+          <div class="user-info">
+            <div>
+              <span class="info-label">Age:</span>
+              <span class="info-value">28</span>
+            </div>
+            <div>
+              <span class="info-label">Location:</span>
+              <span class="info-value">Cityville</span>
+            </div>
+            <div>
+              <a href="{% url "user:edit" profile.id %}">Edit</a>
+              {% comment %} <span class="info-label">Location:</span> {% endcomment %}
+              {% comment %} <span class="info-value">Cityville</span> {% endcomment %}
+            </div>
+          </div>
+        </div>
+        {% if user.is_authenticated and profile.can_publish%}
+        <div class="nav-item publish">
+            <a href="{% url "news:publishnews" %}"><button class="publish-button">Publish News</button></a>
+        </div>
+        {% else %}
+        <div class="nav-item publish">
+            <button class="publish-button">CV Processing...</button>
+        </div>
+        
+        {% endif %}
+        
+      </div>
 
-{% block publish %}
 
-{% if profile and user.is_authenticated%}
-    
-        <a href="#"><button class="publish-button">Publish News</button></a>
-{% endif %}
+<h3 class="posted">Posted News</h3>
+{% for new in news %}
 
-{% endblock publish %}
+<div class="news-card">
+        
+  <a href="{% url "news:newsdetail" new.id %}"><img class="news-img" src="{{new.image.url}}" alt="News Image"></a>
+  <div class="news-content">
+    {% comment %} <div class="news-title">{{new.title}}</div> {% endcomment %}
+    <a href="{% url "news:newsedit" new.id %}">Edit</a>
+    <a href="{% url "news:delete_confirmation" new.id %}">Delete</a>
+    {% comment %} <div class="news-">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div> {% endcomment %}
+  </div>
+</div>
+
+
+{% endfor %}
+
+
+
+{% endblock content %}
+
+
 
 
 

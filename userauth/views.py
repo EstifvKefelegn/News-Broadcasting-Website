@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import user_passes_test, login_required
 from .models import JournalistProfile 
-from News.models import NewsCategory
+from News.models import NewsCategory, News
 from django.http import HttpResponse
 
 
@@ -62,6 +62,7 @@ def create_profile(request):
     if request.method == "POST":
         profile_picture = request.FILES['profile_image']
         # catagory = request.POST['category']
+        bio=request.POST['bio']
         short_intro = request.POST['short_intro']
         CV = request.FILES['upload_cv']
         
@@ -69,6 +70,7 @@ def create_profile(request):
             user=request.user,
             profile_image=profile_picture, 
             # category=catagory,
+            bio=bio,
             short_intro = short_intro,
             upload_cv = CV
             )
@@ -79,7 +81,7 @@ def create_profile(request):
         'profile':profile
     }
 
-    return render(request, 'partials/userprofile.html', context)
+    return render(request, 'partials/userprofileform.html', context)
 
 @user_passes_test(lambda user : user.is_superuser)
 def list_of_users(request):
@@ -109,6 +111,68 @@ def users_detail(request, pk):
 
     return render(request, "partials/user_detail.html", context)
 
+
+
+# def can_publish_news(request):
+#     current_user = request.user
+#     current_user_profile = JournalistProfile.objects.get(user=current_user)
+#     has_publish_permssion = current_user_profile is not None
+    
+#     if   has_publish_permssion:
+#         context = {
+#             "profile": current_user_profile
+#         }
+#         return render(request, "partials/check_user.html", context)
+#     else:
+#         return render(request, "partials/404Error.html")
+@login_required
+def profile(request):
+    # user_information = JournalistProfile.objects.get(journalist_isnull = False)
+    current_user = request.user.id
+    current_user_profile = JournalistProfile.objects.get(user_id=current_user)
+    has_publish_permssion = current_user_profile is not None
+    news = News.objects.filter(author_id=current_user) 
+    
+    if   has_publish_permssion:
+         user_profile = current_user_profile
+    context = {
+        "profile": user_profile,
+        "news":news
+        # "info":user_information
+         
+    }
+    return render(request, "partials/profile.html", context)
+
+def profileedit(request, pk):
+    journalist = JournalistProfile.objects.get(id=pk)
+    # currentuser = request.user.id
+    if request.method == "POST":
+        # username = request.POST['username']
+        image = request.FILES['profile_image']
+        intro = request.POST['short_intro']
+        bio = request.POST['bio']
+        cv = request.FILES['upload_cv']
+        
+        journalist.user = request.user
+        journalist.profile_image = image
+        journalist.short_intro = intro
+        journalist.bio = bio
+        journalist.upload_cv =  cv
+
+
+        # currentuser.username = currentuser
+        # currentuser.save()
+
+        
+        journalist.save()
+        return redirect("user:profile")
+    
+
+    context = {
+        'current_journalist':journalist
+    }
+    print(journalist.bio)
+    return render(request, 'partials/editprofile.html', context)
 
 
 # @user_passes_test(lambda user : user.is_superuser)
