@@ -1,0 +1,16 @@
+{% extends "base/index.html" %}
+{% load static %}
+
+{% block content %}
+
+<form action="#" method="POST">
+    {% csrf_token %}
+    
+    {% for category in categories %}
+        <input type="checkbox" name="selected_options" value="{{ category.id }}" id="category{{ category.id }}">
+        <label for="category{{ category.id }}">{{ category.category_name }}</label><br>
+    {% endfor %}
+    <button type="submit">Submit</button>
+</form>
+
+{% endblock content %}

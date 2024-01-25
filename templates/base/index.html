@@ -59,8 +59,9 @@
         <div class="collapse top-search" id="collapseExample">
             <div class="card card-block">
                 <div class="newsletter-widget text-center">
-                    <form class="form-inline">
-                        <input type="text" class="form-control" placeholder="What you are looking for?">
+                    <form class="form-inline" method="POST" action="{% url "news:videolist" %}">
+                        {% csrf_token %}
+                        <input type="text" name="search-input" class="form-control" placeholder="What you are looking for?">
                         <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
                     </form>
                 </div><!-- end newsletter -->
@@ -134,7 +135,16 @@
                 </div><!-- end row -->
             </div><!-- end container -->
         </section>
+        {% block content_2 %}
+        
+        
 
+        {% endblock content_2 %}
+
+        {% block recommender %}
+        
+        {% endblock recommender %}
+        
         <footer class="footer">
             <div class="container">
                 <div class="row">

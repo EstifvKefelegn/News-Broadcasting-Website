@@ -14,7 +14,9 @@
         <div class="masonry-blog clearfix">
             <div class="left-side">
                 <div class="masonry-box post-media sides">
-                     <img src="{{ left_main_news.image.url }} " alt="" class="img-fluid">
+                <a href="{% url "news:newsdetail" left_main_news.id %}">
+                    <img src="{{ left_main_news.image.url }} " alt="" class="img-fluid">
+                </a>
                      <div class="shadoweffect">
                         <div class="shadow-desc">
                             <div class="blog-meta">
@@ -89,6 +91,11 @@
 </div>
 </section>
 {% endblock content %}
+
+{% block content_2 %}
+{% include "partials/main_content-2.html" %}
+
+{% endblock content_2 %}
 
 
 

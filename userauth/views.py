@@ -4,7 +4,7 @@ from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import user_passes_test, login_required
-from .models import JournalistProfile 
+from .models import JournalistProfile
 from News.models import NewsCategory, News
 from django.http import HttpResponse
 
@@ -12,6 +12,7 @@ from django.http import HttpResponse
 # Create your views here.
 
 def register(request):
+    category = NewsCategory.objects.all()
     signupform = SignUpFrom()
     if request.method == "POST":
         signupform = SignUpFrom(request.POST)
@@ -26,6 +27,7 @@ def register(request):
         signupform = SignUpFrom()
     
     context = {
+        "category":category,
         "form":signupform
     }
 
@@ -33,6 +35,7 @@ def register(request):
 
 
 def signin(request):
+    category = NewsCategory.objects.all()
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -47,8 +50,11 @@ def signin(request):
             messages.warning(request, 'Username or password is incorrect.')
 
     # return render(request, 'users/signin.html')
+    context ={
+        "category":category
+    }
 
-    return render(request, "partials/signin.html")    
+    return render(request, "partials/signin.html", context)    
 
 @login_required
 def signout(request):
@@ -57,6 +63,7 @@ def signout(request):
 
 @login_required
 def create_profile(request):
+    category = NewsCategory.objects.all()
     profile = JournalistProfile.objects.all()
     # category = NewsCategory.objects.all()
     if request.method == "POST":
@@ -78,6 +85,7 @@ def create_profile(request):
         return redirect('news:newslist')
         
     context = {
+        "category":category,
         'profile':profile
     }
 
@@ -85,15 +93,18 @@ def create_profile(request):
 
 @user_passes_test(lambda user : user.is_superuser)
 def list_of_users(request):
+    category = NewsCategory.objects.all()
     users_list = JournalistProfile.objects.all()
 
     context = {
+        "category":category,
         "users_list": users_list
     }
     return render(request, 'partials/userlist.html', context)
 
 @user_passes_test(lambda user: user.is_superuser)
 def users_detail(request, pk):
+    category = NewsCategory.objects.all()
     user_detail = JournalistProfile.objects.get(id=pk)
 
     if request.method == "POST":
@@ -107,6 +118,7 @@ def users_detail(request, pk):
     context = {
         "detail": user_detail,
         "form": form,
+        "category":category
     }
 
     return render(request, "partials/user_detail.html", context)
@@ -127,6 +139,7 @@ def users_detail(request, pk):
 #         return render(request, "partials/404Error.html")
 @login_required
 def profile(request):
+    category = NewsCategory.objects.all()
     # user_information = JournalistProfile.objects.get(journalist_isnull = False)
     current_user = request.user.id
     current_user_profile = JournalistProfile.objects.get(user_id=current_user)
@@ -137,13 +150,15 @@ def profile(request):
          user_profile = current_user_profile
     context = {
         "profile": user_profile,
-        "news":news
+        "news":news,
+        "category":category
         # "info":user_information
          
     }
     return render(request, "partials/profile.html", context)
 
 def profileedit(request, pk):
+    category = NewsCategory.objects.all()
     journalist = JournalistProfile.objects.get(id=pk)
     # currentuser = request.user.id
     if request.method == "POST":
@@ -169,11 +184,13 @@ def profileedit(request, pk):
     
 
     context = {
-        'current_journalist':journalist
+        'current_journalist':journalist,
+        'category':category
     }
     print(journalist.bio)
     return render(request, 'partials/editprofile.html', context)
 
+    
 
 # @user_passes_test(lambda user : user.is_superuser)
 # def users_detail(request, pk):

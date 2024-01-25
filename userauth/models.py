@@ -1,9 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-# from News.models import News
-# from News.models import NewsCategory
-
-# Create your models here.
 
 class JournalistProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

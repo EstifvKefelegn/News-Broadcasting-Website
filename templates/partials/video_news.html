@@ -1,0 +1,84 @@
+{% extends "base/index.html" %}
+{% load static %}
+{% block content %}
+
+
+<div class="page-title wb">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                <h2><i class="fa fa-user-md bg-grey"></i> Video News <small class="hidden-xs-down hidden-sm-down">Nulla felis eros, varius sit amet volutpat non. </small></h2>
+            </div><!-- end col -->
+            <div class="col-lg-4 col-md-4 col-sm-12 hidden-xs-down hidden-sm-down">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Blog</a></li>
+                    <li class="breadcrumb-item active">Video News</li>
+                </ol>
+            </div><!-- end col -->                    
+        </div><!-- end row -->
+    </div><!-- end container -->
+</div><!-- end page-title -->
+
+<section class="section wb">
+    <div class="container">
+        <div class="row">
+            {% for video in video_news %}
+                      {% if video.video is not None %}
+            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                <div class="page-wrapper">
+                    <div class="portfolio row">
+                      
+                      
+                      <div class="pitem item-w1 item-h1">
+                          <div class="blog-box">
+                              <div class="post-media">
+                                  <a href="single.html" title="">
+                                      <img src="{{video.image.url}}" alt="" class="img-fluid">
+                                      <div class="hovereffect">
+                                          <span></span>
+                                      </div><!-- end hover -->
+                                  </a>
+                              </div><!-- end media -->
+                              <div class="blog-meta">
+                                  <span class="bg-grey"><a href="blog-category-01.html" title="">{{video.category}}</a></span>
+                                  <h4><a href="{% url "news:videodetail" video.id %}" title="">{{video.title}}</a></h4>
+                                  <small><a href="blog-author.html" title="">{{video.author}}</a></small>
+                                  <small><a href="blog-category-01.html" title="">{{video.date_created}}</a></small>
+                              </div><!-- end meta -->
+                          </div><!-- end blog-box -->
+                      </div><!-- end col -->
+
+
+
+                    </div><!-- end portfolio -->
+                </div><!-- end page-wrapper -->
+
+                <hr class="invis">
+
+            </div><!-- end col -->
+            {% endif %}                      
+            {% endfor %}
+            <div class="row">
+                <div class="col-md-12">
+                    <nav aria-label="Page navigation">
+                        <ul class="pagination justify-content-start">
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div><!-- end col -->
+            </div><!-- end row -->
+
+        </div><!-- end row -->
+    </div><!-- end container -->
+</section>
+
+{% endblock content %}
+
+
+

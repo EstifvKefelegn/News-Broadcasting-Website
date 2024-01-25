@@ -28,6 +28,10 @@
                             {{ form.image }}
                         </div>
                         <div class="form-field">
+                            <label class="form-label">Add small image to your news:</label>
+                            {{ form.small_image }}
+                        </div>
+                        <div class="form-field">
                             <label for="{{ form.source.id_for_label }}" class="form-label">Source:</label>
                             {{ form.source }}
                         </div>
@@ -37,8 +41,14 @@
                         </div>
                         <div class="form-field">
                             <label for="{{ form.promotion.id_for_label }}" class="form-label">Promotion:</label>
-                            {{ form.promotion }}
-                        </div>
+                            <label for="#">Ad title for promotion</label>
+                            {{ form.promotion_title }}
+                            <label for="#">Add picture for your promotion</label>
+                            {{ form.promotion_picture }}
+                            <label for="#">Add video for your promotion</label>
+                            {{ form.promotion_video }}
+                        </div> 
+  
                         <button type="submit" class="form-submit">Publish your news</button>
                     </form>
                     </div>
