@@ -1,21 +1,44 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponse
 from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .form import NewsUploadForm
 from .models import News, NewsCategory, Review
 from userauth.models import JournalistProfile
+from django.utils.translation import gettext as _
+from django.utils.translation import get_language, activate, gettext
 
-# Create your views here.
+
+
+# # Create your views here.
+def translate(language):
+    cur_language = activate(language)
+    try:
+        text = gettext('hello')
+    finally:
+        activate(cur_language)
+    return text
+
+
 def main(request):
     category = NewsCategory.objects.all()
+    print(category)
     user = request.user
-        
+    if request.method == 'POST':
+        selected_language = request.POST.get('language', 'en')
+        trans = translate(language=selected_language)
+    else:
+        # If the form is not submitted, use the default language
+        trans = translate(language="en")
+
+    # return render(request, "home.html", {"trans": trans})       
 
     context = {
         'category':category,
         # 'profile': current_user if has_journalist_profile else None,
-        'user': user
+        'user': user,
+        "trans": trans
     }
 
     # if has_journalist_profile:
@@ -24,6 +47,8 @@ def main(request):
     # print(context['profile'].can_publish)     
     
     return render(request, 'base/index.html', context)
+
+
     
 def video_list(request):
     category = NewsCategory.objects.all()
@@ -88,6 +113,7 @@ def publish_news(request):
 def news_list(request):
     category = NewsCategory.objects.all() 
     news = News.objects.all()
+    left_news = News.objects.all()[5:]
     list_of_news =[] 
 
     
@@ -105,19 +131,7 @@ def news_list(request):
         bottom_main_news1 = list_of_news[2]
         bottom_main_news2 = list_of_news[3]
         right_main_news = list_of_news[4]
-
         # bottoms
-        bottom_main_first = list_of_news[5]
-        bottom_main_second = list_of_news[6]
-        bottom_left_first = list_of_news[7]
-        bottom_left_second = list_of_news[8]
-        bottom_left_third = list_of_news[9]
-        bottom_left_forth = list_of_news[10]
-        bottom_left_fifth =list_of_news[11]
-        bottom_left_six = list_of_news[12]
-        bottom_left_seven =list_of_news[13]
-        bottom_left_eight = list_of_news[14]
-
     elif not list_of_news and has_journalist_profile == True:    
             return render(request, "base/index.html")    
     else:
@@ -133,17 +147,8 @@ def news_list(request):
         "bottom_main_news1":bottom_main_news1,
         "bottom_main_news2":bottom_main_news2,
         "right_main_news":right_main_news,
-        "bottom_main_first":bottom_main_first,
-        'bottom_main_second':bottom_main_second,
-        "bottom_left_first":bottom_left_first,
-        "bottom_left_second":bottom_left_second,
-        "bottom_left_third":bottom_left_third,
-        "bottom_left_fourth":bottom_left_forth,
-        "bottom_left_fifth":bottom_left_fifth,
-        "bottom_left_six":bottom_left_six,
-        "bottom_left_seven":bottom_left_seven,
-        "bottom_left_eight":bottom_left_eight, 
         # "profile": current_user 
+        "left_news":left_news
     }
     
     return render(request, "base/home.html", context)
@@ -152,10 +157,15 @@ def news_list(request):
 def news_detail(request, pk):
     category = NewsCategory.objects.all()
     detail_news = News.objects.get(id=pk)
+    current_journalist = detail_news.author
+    last_posted_news = News.objects.filter(author=current_journalist).order_by('-date_created')[:2]
     recent_posts = News.objects.filter(category=detail_news.category)[:4]
+    current_category_news = News.objects.filter(category=detail_news.category).order_by('-date_created')[:2]
     #This line manages the user review
     user_review = Review.objects.filter(news=detail_news)
-
+    detail_news.view_count += 1
+    detail_news.save()
+    
     description = detail_news.description
     part_length = len(description) // 4
     first_part = description[:part_length]
@@ -183,7 +193,10 @@ def news_detail(request, pk):
         "third_body_part": third_part,
         "fourth_part": fourth_part,
         "review":user_review,
-        "recent_posts": recent_posts
+        "recent_posts": recent_posts,
+        "last_posted_news":last_posted_news,
+        "current_journalist":current_journalist,
+        "current_category":current_category_news
     }
 
     return render(request, "partials/newsdetail.html", context)

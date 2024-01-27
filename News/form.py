@@ -16,7 +16,7 @@ class NewsUploadForm(forms.ModelForm):
 
     class Meta:
         model = News
-        fields = ['author','title', 'description', 'video', "image","small_image", 'small_title','source', 'category', "promotion"]
+        fields = ['author','title', 'description', 'video', "image","small_image",'second_image', 'small_title','source', 'category', "promotion"]
 
     def save(self, commit=True):
         news_instance = super().save(commit=False)

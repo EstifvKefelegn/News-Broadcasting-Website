@@ -36,11 +36,13 @@ class News(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     video = models.FileField(upload_to="videos/", null=True, blank=True)
     image = models.ImageField(upload_to="pictures/", null=True, blank=True)
+    second_image = models.ImageField(upload_to="pictures/", null=True, blank=True)
     small_image = models.ImageField(upload_to="pictures/", null=True, blank=True)
     small_title =models.CharField(max_length=150, null=True, blank=True)
     source = models.CharField(max_length=200, null=True, blank=True)
     category = models.ForeignKey(NewsCategory, on_delete=models.CASCADE, related_name="news")
     promotion = models.OneToOneField(Promotion, null=True, blank=True, on_delete=models.CASCADE)
+    view_count = models.IntegerField(default=0)
 
     def __str__(self) -> str:
         return f"\"{self.title}\" from the \"{self.category}\" category"

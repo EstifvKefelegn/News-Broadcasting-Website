@@ -2,202 +2,34 @@
 <section class="section">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <div class="section-title">
-                    <h3 class="color-aqua"><a href="#" title="">{{bottom_main_first.category}}</a></h3>
-                </div><!-- end title -->
-
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <div class="blog-box">
-                            <div class="post-media">
-                                <a href="{% url "news:newsdetail" bottom_main_first.id %}" title="">
-                                    <img src="{{bottom_main_first.image.url}}" alt="" class="img-fluid">
-                                    <div class="hovereffect">
-                                        <span></span>
-                                    </div><!-- end hover -->
-                                </a>
-                            </div><!-- end media -->
-                            <div class="blog-meta big-meta">
-                                <h4><a href="{% url "news:newsdetail" bottom_main_first.id %}" title="">{{bottom_main_first.title}}</a></h4>
-                                <p>{{bottom_main_first.description}}.</p>
-                                <small><a href="blog-category-01.html" title="">{{bottom_main_first.category}}</a></small>
-                                <small><a href="single.html" title="">{{bottom_main_first.date_created}}</a></small>
-                                <small><a href="blog-author.html" title="">{{bottom_main_first.author}}</a></small>
-                            </div><!-- end meta -->
-                        </div><!-- end blog-box -->
-
-                        <hr class="invis">
-
-                        <div class="blog-box">
-                            <div class="post-media">
-                                <a href="{% url "news:newsdetail" bottom_left_first.id %}" title="">
-                                    <img src="{{bottom_left_first.image.url}}" alt="" class="img-fluid">
-                                    <div class="hovereffect">
-                                        <span></span>
-                                    </div><!-- end hover -->
-                                </a>
-                            </div><!-- end media -->
-                            <div class="blog-meta big-meta">
-                                <h4><a href="{% url "news:newsdetail" bottom_left_first.id %}" title="">{{bottom_left_first.title}}</a></h4>
-                                <p>{{bottom_left_first.description}}</p>
-                                <small><a href="blog-category-01.html" title="">{{bottom_left_first.category}}</a></small>
-                                <small><a href="single.html" title="">{{bottom_left_first.date_created}}</a></small>
-                                <small><a href="blog-author.html" title="">{{bottom_left_first.author}}</a></small>
-                            </div><!-- end meta -->
-                        </div><!-- end blog-box -->
-                    </div><!-- end col -->
-                </div><!-- end row -->
-            </div><!-- end col -->
-
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="section-title">
                     <h3 class="color-pink"><a href="blog-category-01.html" title="">{{bottom_main_second.category}}</a></h3>
                 </div><!-- end title -->
                 <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    {% for new in left_news %}
+                    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
                         <div class="blog-box">
                             <div class="post-media">
-                                <a href="{% url "news:newsdetail" bottom_main_second.id %}" title="">
-                                    <img src="{{bottom_main_second.image.url}}" alt="" class="img-fluid">
+                                <a href="{% url "news:newsdetail" new.id %}" title="">
+                                    <img src="{{new.image.url}}" alt="" class="img-fluid">
                                     <div class="hovereffect">
                                         <span></span>
                                     </div><!-- end hover -->
                                 </a>
                             </div><!-- end media -->
                             <div class="blog-meta">
-                                <h4><a href="{% url "news:newsdetail" bottom_main_second.id %}" title="">{{bottom_main_second.title}}</a></h4>
-                                <small><a href="blog-category-01.html" title="">{{bottom_main_second.category}}</a></small>
-                                <small><a href="blog-category-01.html" title="">{{bottom_main_second.date_created}}</a></small>
+                                <h4><a href="{% url "news:newsdetail" new.id %}" title="">{{new.title}}</a></h4>
+                                <small><a href="blog-category-01.html" title="">{{new.category}}</a></small>
+                                <small><a href="blog-category-01.html" title="">{{new.date_created}}</a></small>
                             </div><!-- end meta -->
                         </div><!-- end blog-box -->
-
-                        <hr class="invis">
-
-                        <div class="blog-box">
-                            <div class="post-media">
-                                <a href="{% url "news:newsdetail" bottom_left_second.id %}" title="">
-                                    <img src="{{bottom_left_second.image.url}}" alt="" class="img-fluid">
-                                    <div class="hovereffect">
-                                        <span></span>
-                                    </div><!-- end hover -->
-                                </a>
-                            </div><!-- end media -->
-                            <div class="blog-meta">
-                                <h4><a href="{% url "news:newsdetail" bottom_left_second.id %}" title="">{{bottom_left_second.title}}</a></h4>
-                                <small><a href="blog-category-01.html" title="">{{bottom_left_second.category}}</a></small>
-                                <small><a href="blog-category-01.html" title="">{{bottom_left_second.date_created}}</a></small>
-                            </div><!-- end meta -->
-                        </div><!-- end blog-box -->
-
-                        <hr class="invis">
-
-                        <div class="blog-box">
-                            <div class="post-media">
-                                <a href="{% url "news:newsdetail" bottom_left_seven.id %}" title="">
-                                    <img src="{{bottom_left_seven.image.url}}" alt="" class="img-fluid">
-                                    <div class="hovereffect">
-                                        <span></span>
-                                    </div><!-- end hover -->
-                                </a>
-                            </div><!-- end media -->
-                            <div class="blog-meta">
-                                <h4><a href="{% url "news:newsdetail" bottom_left_seven.id %}" title="">{{bottom_left_seven.title}}</a></h4>
-                                <small><a href="blog-category-01.html" title="">{{bottom_left_seven.category}}</a></small>
-                                <small><a href="blog-category-01.html" title="">{{bottom_left_seven.date_created}}</a></small>
-                            </div><!-- end meta -->
-                        </div><!-- end blog-box -->
-
-                        <hr class="invis">
-
-                        <div class="blog-box">
-                            <div class="post-media">
-                                <a href="{% url "news:newsdetail" bottom_left_eight.id %}" title="">
-                                    <img src="{{bottom_left_eight.image.url}}" alt="" class="img-fluid">
-                                    <div class="hovereffect">
-                                        <span></span>
-                                    </div><!-- end hover -->
-                                </a>
-                            </div><!-- end media -->
-                            <div class="blog-meta">
-                                <h4><a href="{% url "news:newsdetail" bottom_left_eight.id %}" title="">{{bottom_left_eight.title}}</a></h4>
-                                <small><a href="blog-category-01.html" title="">{{bottom_left_eight.category}}</a></small>
-                                <small><a href="blog-category-01.html" title="">{{bottom_left_eight.date_created}}</a></small>
-                            </div><!-- end meta -->
-                        </div><!-- end blog-box -->
-
+                        
+                        
                     </div><!-- end col -->
+                    {% endfor %}
 
-                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="blog-box">
-                            <div class="post-media">
-                                <a href="{% url "news:newsdetail" bottom_left_third.id %}" title="">
-                                    <img src="{{bottom_left_third.image.url}}" alt="" class="img-fluid">
-                                    <div class="hovereffect">
-                                        <span></span>
-                                    </div><!-- end hover -->
-                                </a>
-                            </div><!-- end media -->
-                            <div class="blog-meta">
-                                <h4><a href="{% url "news:newsdetail" bottom_left_third.id %}" title="">{{bottom_left_third.title}}</a></h4>
-                                <small><a href="blog-category-01.html" title="">{{bottom_left_third.category}}</a>, <a href="blog-category-01.html" title="">Man</a></small>
-                                <small><a href="blog-category-01.html" title="">{{bottom_left_third.date_created}}</a></small>
-                            </div><!-- end meta -->
-                        </div><!-- end blog-box -->
-
-                        <hr class="invis">
-
-                        <div class="blog-box">
-                            <div class="post-media">
-                                <a href="{% url "news:newsdetail" bottom_left_fourth.id %}" title="">
-                                    <img src="{{bottom_left_fourth.image.url}}" alt="" class="img-fluid">
-                                    <div class="hovereffect">
-                                        <span></span>
-                                    </div><!-- end hover -->
-                                </a>
-                            </div><!-- end media -->
-                            <div class="blog-meta">
-                                <h4><a href="{% url "news:newsdetail" bottom_left_fourth.id %}" title="">{{bottom_left_fourth.title}}</a></h4>
-                                <small><a href="blog-category-01.html" title="">{{bottom_left_fourth.category}}</a>, <a href="blog-category-01.html" title="">Style</a></small>
-                                <small><a href="blog-category-01.html" title="">{{bottom_left_fourth.date_created}}</a></small>
-                            </div><!-- end meta -->
-                        </div><!-- end blog-box -->
-                        <hr class="invis">
-
-                        <div class="blog-box">
-                            <div class="post-media">
-                                <a href="{% url "news:newsdetail" bottom_left_fifth.id %}" title="">
-                                    <img src="{{bottom_left_fifth.image.url}}" alt="" class="img-fluid">
-                                    <div class="hovereffect">
-                                        <span></span>
-                                    </div><!-- end hover -->
-                                </a>
-                            </div><!-- end media -->
-                            <div class="blog-meta">
-                                <h4><a href="{% url "news:newsdetail" bottom_left_fifth.id %}" title="">{{bottom_left_fifth.title}}</a></h4>
-                                <small><a href="blog-category-01.html" title="">{{bottom_left_fifth.category}}</a>, <a href="blog-category-01.html" title="">Style</a></small>
-                                <small><a href="blog-category-01.html" title="">{{bottom_left_fifth.date_created}}</a></small>
-                            </div><!-- end meta -->
-                        </div><!-- end blog-box -->
-                        <hr class="invis">
-
-                        <div class="blog-box">
-                            <div class="post-media">
-                                <a href="{% url "news:newsdetail" bottom_left_six.id %}" title="">
-                                    <img src="{{bottom_left_six.image.url}}" alt="" class="img-fluid">
-                                    <div class="hovereffect">
-                                        <span></span>
-                                    </div><!-- end hover -->
-                                </a>
-                            </div><!-- end media -->
-                            <div class="blog-meta">
-                                <h4><a href="{% url "news:newsdetail" bottom_left_six.id %}" title="">{{bottom_left_six.title}}</a></h4>
-                                <small><a href="blog-category-01.html" title="">{{bottom_left_six.category}}</a>, <a href="blog-category-01.html" title="">Style</a></small>
-                                <small><a href="blog-category-01.html" title="">{{bottom_left_six.date_created}}</a></small>
-                            </div><!-- end meta -->
-                        </div><!-- end blog-box -->
-                                  
-                    </div><!-- end col -->
                 </div><!-- end row -->
             </div><!-- end col -->
         </div><!-- end row -->

@@ -1,0 +1,71 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-27 08:01+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: Base/settings.py:176
+msgid "English"
+msgstr ""
+
+#: Base/settings.py:177
+msgid "አማርኛ"
+msgstr ""
+
+#: Base/urls.py:10
+msgid "admin/"
+msgstr ""
+
+#: News/views.py:18
+msgid "hello"
+msgstr ""
+
+#: templates/base/index.html:94
+msgid "Write for us"
+msgstr ""
+
+#: templates/partials/header.html:12
+msgid "Home"
+msgstr ""
+
+#: templates/partials/header.html:16
+msgid "Category"
+msgstr ""
+
+#: templates/partials/header.html:25
+msgid "Features"
+msgstr ""
+
+#: templates/partials/header.html:27 templates/partials/video_news.html:17
+msgid "Video News"
+msgstr ""
+
+#: templates/partials/header.html:83
+msgid "List of users"
+msgstr ""
+
+#: templates/partials/header.html:89
+msgid "Logout"
+msgstr ""
+
+#: templates/partials/header.html:94
+msgid "Register"
+msgstr ""
+
+#: templates/partials/header.html:97
+msgid "Signin"
+msgstr ""

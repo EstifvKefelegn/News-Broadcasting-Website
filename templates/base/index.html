@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 
 <!DOCTYPE html>
@@ -85,17 +86,31 @@
 
                     <div class="col-lg-4 hidden-md-down">
                         <div class="topmenu text-center">
+                            
                             <ul class="list-inline">
                                 <li class="list-inline-item"><a href="blog-category-01.html"><i class="fa fa-star"></i> Trends</a></li>
                                 <li class="list-inline-item"><a href="blog-category-02.html"><i class="fa fa-bolt"></i> Hot Topics</a></li>
-                                <li class="list-inline-item"><a href="page-contact.html"><i class="fa fa-user-circle-o"></i> Write for us</a></li>
+                                <li class="list-inline-item"><a href="page-contact.html"><i class="fa fa-user-circle-o"></i> {% trans "Write for us" %} </a></li>
                                 {% if user.is_authenticated and user.journalistprofile%}
                                 {% comment %} <li class="list-inline-item"><a href="page-contact.html"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li> {% endcomment %}
                                 <li class="list-inline-item"><a href="{% url "user:profile" %}"><i class="fa fa-user" aria-hidden="true"></i>{{user.username}}</a></li>
                                 {% elif  user.is_authenticated %}
                                 <li class="list-inline-item"><a href="{% url "user:profileform" %}"><i class="fa fa-user" aria-hidden="true"></i>Rgister to publish new</a></li>
                                 {% endif %}
+                            <form method="post" action="{% url 'news:holder' %}">
+                                {% csrf_token %}
+                                <li>
+                                <label for="language">Select Language:</label>
+                                <select name="language" id="language">
+                                    <option value="en" {% if trans == 'en' %}selected{% endif %}>English</option>
+                                    <option value="am" {% if trans == 'am' %}selected{% endif %}>አማርኛ</option>
+                                    <!-- Add more language options as needed -->
+                                    
+                                </select>
+                                <button type="submit">Change</button>
+                            </li>
                                 
+                            </form>    
                             </ul><!-- end ul -->
                         </div><!-- end topmenu -->
                     </div><!-- end col -->
