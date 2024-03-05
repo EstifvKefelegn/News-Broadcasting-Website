@@ -30,7 +30,7 @@
                         <div class="blog-box row">
                             <div class="col-md-4">
                                 <div class="post-media">
-                                    <a href="single.html" title="">
+                                    <a href="{% url "news:newsdetail" news.id %}" title="">
                                         <img src="{{ news.image.url }}" alt="" class="img-fluid">
                                         <div class="hovereffect"></div>
                                     </a>
@@ -225,49 +225,40 @@
                 </div><!-- end row -->
             </div><!-- end col -->
 
+            {% block sidebar %}
+            
             <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                 <div class="sidebar">
                     <div class="widget">
                         <h2 class="widget-title">Search</h2>
-                        <form class="form-inline search-form">
+                        <form class="form-inline search-form" method="POST">
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Search on the site">
+                                <input type="text" class="form-control" name="specific-search" placeholder="Search on the site">
                             </div>
                             <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
                         </form>
                     </div><!-- end widget -->
-
+            
                     <div class="widget">
                         <h2 class="widget-title">Recent Posts</h2>
                         <div class="blog-list-widget">
                             <div class="list-group">
+                                {% for recent in news_article %}                   
                                 <a href="single.html" class="list-group-item list-group-item-action flex-column align-items-start">
                                     <div class="w-100 justify-content-between">
-                                        <img src="upload/blog_square_01.jpg" alt="" class="img-fluid float-left">
-                                        <h5 class="mb-1">5 Beautiful buildings you need to before dying</h5>
-                                        <small>12 Jan, 2016</small>
+                                        <img src="{{recent.image.url}}" alt="" class="img-fluid float-left">
+                                        <h5 class="mb-1">{{recent.title}}</h5>
+                                        <small>{{recent.date_created}}</small>
                                     </div>
                                 </a>
-
-                                <a href="single.html" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="w-100 justify-content-between">
-                                        <img src="upload/blog_square_02.jpg" alt="" class="img-fluid float-left">
-                                        <h5 class="mb-1">Let's make an introduction for creative life</h5>
-                                        <small>11 Jan, 2016</small>
-                                    </div>
-                                </a>
-
-                                <a href="single.html" class="list-group-item list-group-item-action flex-column align-items-start">
-                                    <div class="w-100 last-item justify-content-between">
-                                        <img src="upload/blog_square_03.jpg" alt="" class="img-fluid float-left">
-                                        <h5 class="mb-1">Did you see the most beautiful sea in the world?</h5>
-                                        <small>07 Jan, 2016</small>
-                                    </div>
-                                </a>
+                                {% endfor %}
+            
+                                
+                                
                             </div>
                         </div><!-- end blog-list -->
                     </div><!-- end widget -->
-
+            
                     <div class="widget">
                         <h2 class="widget-title">Advertising</h2>
                         <div class="banner-spot clearfix">
@@ -276,7 +267,7 @@
                             </div><!-- end banner-img -->
                         </div><!-- end banner -->
                     </div><!-- end widget -->
-
+            
                     <div class="widget">
                         <h2 class="widget-title">Instagram Feed</h2>
                         <div class="instagram-wrapper clearfix">
@@ -291,23 +282,25 @@
                             <a href="#"><img src="upload/insta_09.jpeg" alt="" class="img-fluid"></a>
                         </div><!-- end Instagram wrapper -->
                     </div><!-- end widget -->
-
+            
                     <div class="widget">
                         <h2 class="widget-title">Popular Categories</h2>
                         <div class="link-widget">
                             <ul>
-                                <li><a href="#">Fahsion <span>(21)</span></a></li>
-                                <li><a href="#">Lifestyle <span>(15)</span></a></li>
-                                <li><a href="#">Art & Design <span>(31)</span></a></li>
-                                <li><a href="#">Health Beauty <span>(22)</span></a></li>
-                                <li><a href="#">Clothing <span>(66)</span></a></li>
-                                <li><a href="#">Entertaintment <span>(11)</span></a></li>
-                                <li><a href="#">Food & Drink <span>(87)</span></a></li>
+                                {% for category in category %}
+                                    <li><a href="#">{{category.category_name}}</a></li>
+                                {% endfor %}
                             </ul>
                         </div><!-- end link-widget -->
                     </div><!-- end widget -->
+            
                 </div><!-- end sidebar -->
             </div><!-- end col -->
+            
+            {% endblock sidebar %}
+
+
+
         </div><!-- end row -->
     </div><!-- end container -->
 </section>

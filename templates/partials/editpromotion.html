@@ -1,0 +1,15 @@
+{% extends "base/index.html" %}
+{% block content %}
+
+<form action="#" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="#">Promotion title</label>
+    <input type="text" value="{{promtionform.title}}" name="promo-title">
+    <label for="#">Promotion picture</label>
+    <input type="file" name="promo-picture">
+    <label for="#">Promotion video</label>
+    <input type="file" name="promo-video">
+    <button type="submit">Edit Promotion</button>
+</form>
+
+{% endblock content %}

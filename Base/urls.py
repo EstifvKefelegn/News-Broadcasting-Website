@@ -7,6 +7,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 urlpatterns = [
+    path("__debug__/", include("debug_toolbar.urls")),
     path(_('admin/'), admin.site.urls),
  
 ]

@@ -57,6 +57,13 @@
 
 {% endfor %}
 
+<br>
+{% if user.is_authenticated and profile.can_publish%}
+<div class="nav-item publish">
+  <a href="{% url "news:promotion" %}">  <button  class="publish-button">Add Promotion</button></a>
+</div>
+{% endif %}
+
 
 
 {% endblock content %}

@@ -78,7 +78,7 @@
 
                     {% if user.is_superuser %}
                     <li class="nav-item">
-                        <a class="nav-link color-grey-hover" href="{% url "user:userlist" %}"><strong>{% trans "List of users" %} </strong> </a>
+                        <a class="nav-link color-grey-hover" href="{% url "user:userlist" %}"><strong><span>{{journalist_requests}} request <br></span>{% trans "List of users" %} </strong> </a>
                     </li>
                     {% endif %}
 

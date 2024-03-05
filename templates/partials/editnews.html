@@ -5,52 +5,67 @@
 <div class="page-wrapper">    
 <div class="form-container">
                 <h2>Edit Your News</h2>
-                    <form method="POST" action="#" class="publish-form-class" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <div class="form-field">
-                            <label for="{{ form.author.id_for_label }}" class="form-label">Author:</label>
-                            {{ form.author }}
-                        </div>
-                        <div class="form-field">
-                            <label for="{{ form.title.id_for_label }}" class="form-label">Title:</label>
-                            {{ form.title }}
-                        </div>
-                        <div class="form-field">
-                            <label for="{{ form.description.id_for_label }}" class="form-label">Description:</label>
-                            {{ form.description }}
-                        </div>
-                        <div class="form-field">
-                            <label for="{{ form.video.id_for_label }}" class="form-label">Video:</label>
-                            {{ form.video }}
-                        </div>
-                        <div class="form-field">
-                            <label class="form-label">Image:</label>
-                            {{ form.image }}
-                        </div>
-                        <div class="form-field">
-                            <label class="form-label">Add small image to your news:</label>
-                            {{ form.small_image }}
-                        </div>
-                        <div class="form-field">
-                            <label for="{{ form.source.id_for_label }}" class="form-label">Source:</label>
-                            {{ form.source }}
-                        </div>
-                        <div class="form-field">
-                            <label for="{{ form.category.id_for_label }}" class="form-label">Category:</label>
-                            {{ form.category }}
-                        </div>
-                        <div class="form-field">
-                            <label for="{{ form.promotion.id_for_label }}" class="form-label">Promotion:</label>
-                            <label for="#">Ad title for promotion</label>
-                            {{ form.promotion_title }}
-                            <label for="#">Add picture for your promotion</label>
-                            {{ form.promotion_picture }}
-                            <label for="#">Add video for your promotion</label>
-                            {{ form.promotion_video }}
-                        </div> 
-  
-                        <button type="submit" class="form-submit">Publish your news</button>
-                    </form>
+                <form method="POST" action="" class="publish-form-class" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    {% comment %} <div class="form-field">
+                        <label for="{{ form.author.id_for_label }}" class="form-label">Author:</label>
+                        {{ form.author }}
+                    </div> {% endcomment %}
+                    <div class="form-field">
+                        <label for="{{ form.title.id_for_label }}" class="form-label">Title:</label>
+                        <input type="text" value="{{current_news.title}}" name="news-title">
+                    </div>
+                    <div class="form-field">
+                        <label for="{{ form.small_title.id_for_label }}" class="form-label">Small Title (Optional):</label>
+                        <input type="text" value="{{current_news.small_title}}" name="news-small-title">
+                    </div>
+                    <div class="form-field">
+                        <label for="{{ form.description.id_for_label }}" class="form-label">Description:</label>
+                        <input type="text" value="{{current_news.description}}" name="news-desc">
+                    </div>
+                    <div class="form-field">
+                        <label for="{{ form.video.id_for_label }}" class="form-label">Video:</label>
+                        <input type="file" name="news-video" id="">
+                        {% if current_news.video %}
+                            <p>News video: {{ current_news.video }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="form-field">
+                        <label for="{{ form.image.id_for_label }}" class="form-label">Image:</label>
+                        {% if current_news.image %}
+                            <p>Image: {{ current_news.image }}</p>
+                        {% endif %}
+                        <input type="file" name="news-image">
+                    </div>
+                    <div class="form-field">
+                        <label for="{{ form.second_image.id_for_label }}" class="form-label">Second image (optional):</label>
+                        {% if current_news.second_image %}
+                            <p>Current Second Image: {{ current_news.second_image }}</p>
+                        {% endif %}
+                        <input type="file" name="news-second-image">
+                    </div>
+                    <div class="form-field">
+                        <label for="{{ form.small_image.id_for_label }}" class="form-label">Small image (optional):</label>
+                        {% if current_news.small_image %}
+                            <p>Small Image: {{ current_news.small_image }}</p>
+                        {% endif %}
+                        <input type="file" name="news-small-image">
+                    </div>
+                    <div class="form-field">
+                        <label for="{{ form.source.id_for_label }}" class="form-label">Source:</label>
+                        <input type="text" value="{{current_news.source}}" name="source">
+                    </div>
+                    <div class="form-field">
+                        <label for="{{ form.category.id_for_label }}" class="form-label">Category:</label>
+                        <select name="news-category" id="#">
+                            {% for category_item in category %}
+                                <option value="{{ category_item.id }}">{{ category_item.category_name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <button type="submit" class="form-submit">Publish your news</button>
+                </form>
                     </div>
                 </div>
             </div>

@@ -16,5 +16,7 @@ urlpatterns = [
         
     path("news/<int:pk>/delete-news/", views.deletenews, name="deletenews"),
     path("news/video-list/",views.video_list, name="videolist"),
-    path("news/video-list/<int:pk>/",views.video_detail, name="videodetail")
+    path("news/video-list/<int:pk>/",views.video_detail, name="videodetail"),
+    path("new/add-promotion/", views.add_promotion, name="promotion"),
+    path("news/edit-promotion/<int:pk>/", views.edit_promotion, name="edit-promotion")
 ]

@@ -19,14 +19,6 @@ class NewsCategory(models.Model):
         return self.category_name
     
 
-class Promotion(models.Model):
-    title = models.CharField(max_length=100, null=True, blank=True)
-    # description = models.TextField(null=True, blank=True)
-    promo_picture = models.ImageField(upload_to="pictures/", null=True, blank=True)
-    promo_videos = models.FileField(upload_to='videos/', null=True, blank=True)
-    
-    def __str__(self) -> str:
-        return self.title
 
 class News(models.Model):
     author = models.ForeignKey(JournalistProfile, on_delete=models.CASCADE, related_name="journalist")
@@ -41,14 +33,24 @@ class News(models.Model):
     small_title =models.CharField(max_length=150, null=True, blank=True)
     source = models.CharField(max_length=200, null=True, blank=True)
     category = models.ForeignKey(NewsCategory, on_delete=models.CASCADE, related_name="news")
-    promotion = models.OneToOneField(Promotion, null=True, blank=True, on_delete=models.CASCADE)
-    view_count = models.IntegerField(default=0)
+    # promotion = models.many(Promotion, null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return f"\"{self.title}\" from the \"{self.category}\" category"
 
     class Meta:
         ordering =["-date_created"]
+
+
+class Promotion(models.Model):
+    title = models.CharField(max_length=100, null=True, blank=True)
+    # description = models.TextField(null=True, blank=True)
+    promo_picture = models.ImageField(upload_to="pictures/", null=True, blank=True)
+    promo_videos = models.FileField(upload_to='videos/', null=True, blank=True)
+    news = models.ForeignKey(News, on_delete=models.SET_NULL, null=True, blank=True)   
+    def __str__(self) -> str:
+        return self.title
+
 
 class Tags(models.Model):
     news = models.ManyToManyField(News)
@@ -59,7 +61,7 @@ class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     news = models.ForeignKey(News, on_delete=models.CASCADE, related_name="reviewed_news")
     review_text = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateField(auto_now_add=True)
     
 
     def __str__(self):
@@ -71,7 +73,7 @@ class Review(models.Model):
 
 class ViewCount(models.Model):
     news = models.OneToOneField(News, on_delete=models.CASCADE)
-    count = models.PositiveIntegerField(default=True)
+    count = models.PositiveIntegerField(default=0)
 
     
 class Likes(models.Model):

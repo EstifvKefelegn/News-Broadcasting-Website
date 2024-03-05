@@ -7,47 +7,51 @@
                 <h2>Publish Your News</h2>
                     <form method="POST" action="" class="publish-form-class" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <div class="form-field">
+                        
+                        {% comment %} <div class="form-field">
                             <label for="{{ form.author.id_for_label }}" class="form-label">Author:</label>
                             {{ form.author }}
-                        </div>
+                        </div> {% endcomment %}
                         <div class="form-field">
                             <label for="{{ form.title.id_for_label }}" class="form-label">Title:</label>
-                            {{ form.title }}
+                            <input type="text" name="news-title">
+                        </div>
+                        <div class="form-field">
+                            <label for="{{ form.small_title.id_for_label }}" class="form-label">Small Title (Optional):</label>
+                            <input type="text" name="news-small-title">
                         </div>
                         <div class="form-field">
                             <label for="{{ form.description.id_for_label }}" class="form-label">Description:</label>
-                            {{ form.description }}
+                            <input type="text" name="news-desc">
                         </div>
                         <div class="form-field">
                             <label for="{{ form.video.id_for_label }}" class="form-label">Video:</label>
-                            {{ form.video }}
+                            <input type="file" name="news-video" id="">
                         </div>
                         <div class="form-field">
                             <label for="{{ form.image.id_for_label }}" class="form-label">Image:</label>
-                            {{ form.image }}
+                            <input type="file" name="news-image">
                         </div>
                         <div class="form-field">
                             <label for="{{ form.second_image.id_for_label }}" class="form-label">Second image (optional):</label>
-                            {{ form.second_image }}
+                            <input type="file" name="news-second-image">
+                        </div>
+                        <div class="form-field">
+                            <label for="{{ form.small_image.id_for_label }}" class="form-label">Small image (optional):</label>
+                            <input type="file" name="news-small-image">
                         </div>
                         <div class="form-field">
                             <label for="{{ form.source.id_for_label }}" class="form-label">Source:</label>
-                            {{ form.source }}
+                            <input type="text" name="source">
                         </div>
                         <div class="form-field">
                             <label for="{{ form.category.id_for_label }}" class="form-label">Category:</label>
-                            {{ form.category }}
+                            <select name="news-category" id="#">
+                                {% for category_item in category %}
+                                    <option value="{{ category_item.id }}">{{ category_item.category_name }}</option>
+                                {% endfor %}
+                            </select>
                         </div>
-                        <div class="form-field">
-                            <label for="{{ form.promotion.id_for_label }}" class="form-label">Promotion:</label>
-                            <label for="#">Ad title for promotion</label>
-                            {{ form.promotion_title }}
-                            <label for="#">Add picture for your promotion</label>
-                            {{ form.promotion_picture }}
-                            <label for="#">Add video for your promotion</label>
-                            {{ form.promotion_video }}
-                        </div> 
                         <button type="submit" class="form-submit">Publish your news</button>
                     </form>
                     </div>

@@ -1,4 +1,3 @@
-{% load i18n %}
 {% load static %}
 
 <!DOCTYPE html>
@@ -24,7 +23,7 @@
     <!-- Design fonts -->
     <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,400i,500,700" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet"> 
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- Bootstrap core CSS -->
     <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
 
@@ -49,7 +48,6 @@
 
 </head>
 <body>
-
     <!-- LOADER -->
     {% comment %} <div id="preloader">
         <img class="preloader" src="images/loader.gif" alt="">
@@ -97,20 +95,19 @@
                                 {% elif  user.is_authenticated %}
                                 <li class="list-inline-item"><a href="{% url "user:profileform" %}"><i class="fa fa-user" aria-hidden="true"></i>Rgister to publish new</a></li>
                                 {% endif %}
-                            <form method="post" action="{% url 'news:holder' %}">
-                                {% csrf_token %}
                                 <li>
-                                <label for="language">Select Language:</label>
-                                <select name="language" id="language">
-                                    <option value="en" {% if trans == 'en' %}selected{% endif %}>English</option>
-                                    <option value="am" {% if trans == 'am' %}selected{% endif %}>አማርኛ</option>
-                                    <!-- Add more language options as needed -->
-                                    
-                                </select>
-                                <button type="submit">Change</button>
-                            </li>
-                                
-                            </form>    
+                                <form method="post" action="{% url 'news:holder' %}">
+                                    {% csrf_token %}
+                                    {% comment %} <label class="lang-label" for="language">Select Language:</label> {% endcomment %}
+                                    <select name="language" id="language" class="Lang-options" onchange="this.form.submit()">
+                                        <option value="" {% if not trans %}selected{% endif %}>Select Language</option>
+                                        <option value="en" {% if trans == 'en' %}selected{% endif %}>English</option>
+                                        <option value="am" {% if trans == 'am' %}selected{% endif %}>አማርኛ</option>
+                                        <!-- Add more language options as needed -->
+                                    </select>
+                                    <!-- No visible button tag -->
+                                </form>
+                            </li>    
                             </ul><!-- end ul -->
                         </div><!-- end topmenu -->
                     </div><!-- end col -->

@@ -1,0 +1,87 @@
+<div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+    <div class="sidebar">
+        <div class="widget">
+            <h2 class="widget-title">Search</h2>
+            <form class="form-inline search-form" method="POST">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="specific-search" placeholder="Search on the site">
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+            </form>
+        </div><!-- end widget -->
+
+        <div class="widget">
+            <h2 class="widget-title">Recent Posts</h2>
+            <div class="blog-list-widget">
+                <div class="list-group">
+                    {% for recent in recent_posts %}                   
+                    <a href="{% url "news:newsdetail" recent.id %}" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="w-100 justify-content-between">
+                            <img src="{{recent.image.url}}" alt="" class="img-fluid float-left">
+                            <h5 class="mb-1">{{recent.title}}</h5>
+                            <small>{{recent.date_created}}</small>
+                            
+                        </div>
+                    </a>
+                    {% endfor %}
+                    
+                    
+                    
+                </div>
+            </div><!-- end blog-list -->
+        </div><!-- end widget -->
+        
+        <div class="widget">
+            <h2 class="widget-title">Advertising</h2>
+            <div class="banner-spot clearfix">
+                <div class="banner-img">
+                    {% if promotion %}
+                    {% if promotion.promo_videos %}
+                    <video class="embed-responsive embed-responsive-16by9" loop autoplay>
+                        <source src="{{ promotion.promo_videos.url }}" class="embed-responsive-item">
+                    </video>
+                    {% else %}
+                    <img src="{{ promotion.promo_picture.url }}" alt="" class="img-fluid">
+                    {% endif %}
+                    {% endif %}
+                </div><!-- end banner -->
+                
+            </div><!-- end widget -->
+            <div class="promotion_buttons">
+
+                {% if current_user == detail.author.user and promotion %}
+                    <a href="{% url 'news:edit-promotion' promotion.id %}" class="PromoButton">Edit</a>
+                    <a href="#" class="PromoButton">Delete</a>
+                {% endif %}
+            </div>        
+        </div><!-- end banner-img -->
+
+        <div class="widget">
+            <h2 class="widget-title">Instagram Feed</h2>
+            <div class="instagram-wrapper clearfix">
+                <a class="" href="#"><img src="upload/insta_01.jpeg" alt="" class="img-fluid"></a>
+                <a href="#"><img src="upload/insta_02.jpeg" alt="" class="img-fluid"></a>
+                <a href="#"><img src="upload/insta_03.jpeg" alt="" class="img-fluid"></a>
+                <a href="#"><img src="upload/insta_04.jpeg" alt="" class="img-fluid"></a>
+                <a href="#"><img src="upload/insta_05.jpeg" alt="" class="img-fluid"></a>
+                <a href="#"><img src="upload/insta_06.jpeg" alt="" class="img-fluid"></a>
+                <a href="#"><img src="upload/insta_07.jpeg" alt="" class="img-fluid"></a>
+                <a href="#"><img src="upload/insta_08.jpeg" alt="" class="img-fluid"></a>
+                <a href="#"><img src="upload/insta_09.jpeg" alt="" class="img-fluid"></a>
+            </div><!-- end Instagram wrapper -->
+        </div><!-- end widget -->
+
+        <div class="widget">
+            <h2 class="widget-title">Popular Categories</h2>
+            <div class="link-widget">
+                <ul>
+                    {% for category in category %}
+                    
+                    <li><a href="#">{{category.category_name}}</a></li>
+                    {% endfor %}
+                </ul>
+            </div><!-- end link-widget -->
+        </div><!-- end widget -->
+
+    </div><!-- end sidebar -->
+</div><!-- end col -->
